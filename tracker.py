@@ -63,3 +63,34 @@ def draw_heatmap(frame):
 
             cell = tk.Label(frame, bg=color, width=4, height=2)
             cell.grid(row=j, column=27 - i, padx=1, pady=1)
+# ---------------- ANALYTICS ----------------
+def weekly_analytics():
+    data = load_data()
+    total = 0
+    for i in range(7):
+        day = str(datetime.now().date() - timedelta(days=i))
+        total += data.get(day, 0)
+
+    messagebox.showinfo(
+        "Weekly Analytics",
+        f"📊 Last 7 days productivity score: {total}\n🔥 Average/day: {round(total/7,2)}"
+    )
+
+# ---------------- AI REWARDS ----------------
+def ai_reward():
+    streak = calculate_streak()
+    rewards = [
+        "🎧 Listen to your favorite music",
+        "☕ Take a coffee break",
+        "📺 Watch one episode guilt-free",
+        "📖 Read something non-academic",
+        "🚶 Take a short walk",
+        "🔥 Post your streak on LinkedIn 😄"
+    ]
+
+    if streak >= 7:
+        reward = random.choice(rewards)
+        messagebox.showinfo("AI Reward 🎁", f"Streak: {streak} days\nReward: {reward}")
+    else:
+        messagebox.showinfo("Keep Going 💪", f"Current streak: {streak}\nReach 7 days for rewards!")
+
