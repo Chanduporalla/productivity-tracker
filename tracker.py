@@ -41,7 +41,6 @@ def calculate_streak():
             break
     return streak
 
-
 # ---------------- HEATMAP ----------------
 def draw_heatmap(frame):
     data = load_data()
@@ -63,6 +62,7 @@ def draw_heatmap(frame):
 
             cell = tk.Label(frame, bg=color, width=4, height=2)
             cell.grid(row=j, column=27 - i, padx=1, pady=1)
+
 # ---------------- ANALYTICS ----------------
 def weekly_analytics():
     data = load_data()
@@ -93,7 +93,6 @@ def ai_reward():
         messagebox.showinfo("AI Reward 🎁", f"Streak: {streak} days\nReward: {reward}")
     else:
         messagebox.showinfo("Keep Going 💪", f"Current streak: {streak}\nReach 7 days for rewards!")
-
 
 # ---------------- REMINDER ----------------
 def reminder_loop():
