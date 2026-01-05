@@ -94,3 +94,40 @@ def ai_reward():
     else:
         messagebox.showinfo("Keep Going 💪", f"Current streak: {streak}\nReach 7 days for rewards!")
 
+
+# ---------------- REMINDER ----------------
+def reminder_loop():
+    while True:
+        time.sleep(3600)  # every 1 hour
+        messagebox.showinfo("Reminder ⏰", "Have you logged your productivity today?")
+
+# ---------------- UI ----------------
+root = tk.Tk()
+root.title("🔥 Productivity Streak Tracker")
+root.geometry("900x500")
+root.configure(bg="#0d1117")
+
+title = tk.Label(root, text="GitHub-Style Productivity Tracker", fg="white", bg="#0d1117",
+                 font=("Arial", 18, "bold"))
+title.pack(pady=10)
+
+streak_label = tk.Label(root, text=f"🔥 Current Streak: {calculate_streak()} days",
+                        fg="#58a6ff", bg="#0d1117", font=("Arial", 14))
+streak_label.pack(pady=5)
+
+btn_frame = tk.Frame(root, bg="#0d1117")
+btn_frame.pack(pady=10)
+
+tk.Button(btn_frame, text="✅ Mark Today Done", command=mark_today_done, width=20).grid(row=0, column=0, padx=5)
+tk.Button(btn_frame, text="📊 Weekly Analytics", command=weekly_analytics, width=20).grid(row=0, column=1, padx=5)
+tk.Button(btn_frame, text="🎁 Get AI Reward", command=ai_reward, width=20).grid(row=0, column=2, padx=5)
+
+heatmap_frame = tk.Frame(root, bg="#0d1117")
+heatmap_frame.pack(pady=20)
+
+draw_heatmap(heatmap_frame)
+
+# Start reminder thread
+threading.Thread(target=reminder_loop, daemon=True).start()
+
+root.mainloop()
