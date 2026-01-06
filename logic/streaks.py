@@ -1,15 +1,16 @@
 from datetime import datetime, timedelta
 
-def mark(data):
+def update_streak(data, completed_today):
     today = str(datetime.now().date())
-    data["streak"][today] = 1
+    if completed_today:
+        data["streak"][today] = True
+    else:
+        data["streak"].pop(today, None)
 
-def count(data):
-    streak = 0
-    today = datetime.now().date()
-    for i in range(365):
-        if str(today - timedelta(days=i)) in data["streak"]:
-            streak += 1
-        else:
-            break
-    return streak
+def get_streak_count(data):
+    count = 0
+    d = datetime.now().date()
+    while str(d) in data["streak"]:
+        count += 1
+        d -= timedelta(days=1)
+    return count

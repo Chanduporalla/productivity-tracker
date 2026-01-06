@@ -1,18 +1,22 @@
 import json, os
 
-FILE = "data/data.json"
+DATA_FILE = "data/data.json"
 
-def load():
-    if not os.path.exists(FILE):
-        return {
-            "tasks": {},
-            "streak": {},
-            "skills": {},
-            "projects": [],
-            "finance": {"income": [], "expenses": []}
-        }
-    return json.load(open(FILE))
+DEFAULT_DATA = {
+    "tasks": {},
+    "goals": {"daily": [], "monthly": [], "yearly": []},
+    "skills": {},
+    "projects": [],
+    "finance": {"income": [], "expenses": []},
+    "streak": {}
+}
 
-def save(data):
-    os.makedirs("data", exist_ok=True)
-    json.dump(data, open(FILE, "w"), indent=4)
+def load_data():
+    if not os.path.exists(DATA_FILE):
+        os.makedirs("data", exist_ok=True)
+        save_data(DEFAULT_DATA)
+        return DEFAULT_DATA
+    return json.load(open(DATA_FILE))
+
+def save_data(data):
+    json.dump(data, open(DATA_FILE, "w"), indent=4)
