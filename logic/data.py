@@ -1,22 +1,27 @@
-import json, os
+import json
+import os
+from datetime import datetime
 
-DATA_FILE = "data/data.json"
+DATA_PATH = "data/data.json"
 
 DEFAULT_DATA = {
-    "tasks": {},
-    "goals": {"daily": [], "monthly": [], "yearly": []},
-    "skills": {},
-    "projects": [],
-    "finance": {"income": [], "expenses": []},
-    "streak": {}
+    "tasks": {},      # date -> list of tasks
+    "streak": {}      # date -> true (completed)
 }
 
-def load_data():
-    if not os.path.exists(DATA_FILE):
-        os.makedirs("data", exist_ok=True)
+def ensure_data_file():
+    os.makedirs("data", exist_ok=True)
+    if not os.path.exists(DATA_PATH):
         save_data(DEFAULT_DATA)
-        return DEFAULT_DATA
-    return json.load(open(DATA_FILE))
+
+def load_data():
+    ensure_data_file()
+    with open(DATA_PATH, "r") as f:
+        return json.load(f)
 
 def save_data(data):
-    json.dump(data, open(DATA_FILE, "w"), indent=4)
+    with open(DATA_PATH, "w") as f:
+        json.dump(data, f, indent=4)
+
+def today():
+    return str(datetime.now().date())
