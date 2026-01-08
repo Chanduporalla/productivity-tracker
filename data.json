@@ -1,11 +1,11 @@
 {
-  "tasks": [
-    {
-      "name": "DSA Practice",
-      "deadline": "2026-01-10",
-      "done": true,
-      "created": "2026-01-08",
-      "completed_on": "2026-01-08"
-    }
-  ]
+    "tasks": [
+        {
+            "name": "today completed",
+            "deadline": "2026-01-08",
+            "done": true,
+            "created": "2026-01-08",
+            "completed_on": "2026-01-08"
+        }
+    ]
 }
