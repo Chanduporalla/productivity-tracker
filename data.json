@@ -1,6 +1,11 @@
 {
-    "tasks": [],
-    "goals": [
-        "complete todat streak"
-    ]
+  "tasks": [
+    {
+      "name": "DSA Practice",
+      "deadline": "2026-01-10",
+      "done": false,
+      "created": "2026-01-08"
+    }
+  ],
+  "goals": []
 }
